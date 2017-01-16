@@ -1,0 +1,67 @@
+package persona;
+
+/**
+ *
+ * @author jl.jasso
+ */
+public class Persona {
+    
+    private String nombre, apellido;
+    private int edad;
+
+    /**
+     * @return the nombre
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * @param nombre the nombre to set
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    /**
+     * @return the apellido
+     */
+    public String getApellido() {
+        return apellido;
+    }
+
+    /**
+     * @param apellido the apellido to set
+     */
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    /**
+     * @return the edad
+     */
+    public int getEdad() {
+        return edad;
+    }
+
+    /**
+     * @param edad the edad to set
+     */
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+    
+    public Persona(String nombre, String apellido, int edad){
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.edad = edad;
+    }
+    
+    public Persona(String nombreCompleto){
+        String[] nC = nombreCompleto.split(" ");
+        this.nombre = nC[0];
+        this.apellido = nC[1];
+        this.edad = 0;
+    
+    }
+}

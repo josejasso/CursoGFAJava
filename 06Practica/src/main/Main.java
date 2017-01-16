@@ -14,6 +14,7 @@ public class Main {
         // TODO code application logic here
         Scanner lector = new Scanner(System.in);
         int tamañoA, dato, operacion;
+        
         System.out.println("Introducir tamaño del arreglo: ");
             tamañoA = lector.nextInt();
             
