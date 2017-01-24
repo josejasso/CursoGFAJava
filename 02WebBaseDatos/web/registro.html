@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Autobuses</title>
+</head>
+<body>
+    <p>Practica Web</p>
+
+    <form method="post" action="/autobuses">
+        <label for="num_autobus">Numero de Autobus:</label>
+        <input id="num_autobus"  name="num_autobus" type ="number">
+        <br>
+        <label for="siglas">Siglas:</label>
+        <input id="siglas"  name="siglas" type ="text" maxlength="3">
+        <br>
+        <label for="modelo">Modelo:</label>
+        <input id="modelo"  name="modelo" type ="number" min="1990" max="2017">
+        <br>
+        <label for="capacidad">Capacidad:</label>
+        <input id="capacidad"  name="capacidad" type ="number" min="10" max="40">
+        <br>
+        <label for="base">Base:</label>
+        <select id="base"  name="base">
+            <option value="Leon">LEON</option>
+            <option value="Guadalajara">Guadalajara</option>
+            <option value="Guanajuato">Guanajuato</option>
+            <option value="Celaya">Celaya</option>
+            <option value="Irapuato">Irapuato</option>
+        </select>
+        <br>
+        <button type="submit">Insertar</button>
+    </form>
+</body>
+</html>
