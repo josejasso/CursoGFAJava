@@ -1,6 +1,7 @@
 import javax.xml.namespace.QName;
 import javax.xml.soap.*;
 import java.io.IOException;
+import java.util.Iterator;
 
 public class Main {
 
@@ -10,9 +11,9 @@ public class Main {
             SOAPConnectionFactory factory = SOAPConnectionFactory.newInstance();
             SOAPConnection conexion = factory.createConnection();
             String urlConexion = "http://localhost:8081/estados";
-            SOAPMessage response = conexion.call(generarMensaje(), urlConexion);
+            SOAPMessage response = conexion.call(generarTodo(), urlConexion);
             //generarMensaje();
-            imprimirRespuesta(response);
+            imprimirTodo(response);
             conexion.close();
 
 
@@ -35,6 +36,46 @@ public class Main {
 
         String mensaje = elemento2.getTextContent();
         System.out.println("\n" + mensaje);
+    }
+
+    public static void imprimirTodo(SOAPMessage response) throws SOAPException{
+
+        SOAPBody body = response.getSOAPBody();
+        SOAPElement elemento = (SOAPElement) body.getChildElements(
+                new QName("http://ws/", "getEstadosResponse")).next();
+
+        Iterator<SOAPElement> iterator = elemento.getChildElements(new QName("estado"));
+        iterator.forEachRemaining(estadoSOAP ->{
+            System.out.println("--------------------------------------------------");
+
+            Iterator<SOAPElement> iteratorInterno = estadoSOAP.getChildElements();
+            iteratorInterno.forEachRemaining(etiquetaInterna ->{
+
+                System.out.println(etiquetaInterna.getNodeName() +": "+ etiquetaInterna.getTextContent());
+
+            });
+
+            System.out.println("--------------------------------------------------");
+        });
+    }
+
+    public static SOAPMessage generarTodo() throws SOAPException, IOException{
+
+        MessageFactory factory = MessageFactory.newInstance();
+        SOAPMessage mensaje = factory.createMessage();
+        SOAPPart soapPart = mensaje.getSOAPPart();
+        String servicioUri = "http://ws/";
+        SOAPEnvelope envelope = soapPart.getEnvelope();
+        envelope.addNamespaceDeclaration("ws",servicioUri);
+        SOAPBody body = envelope.getBody();
+        SOAPElement elemento = body.addChildElement("getEstados", "ws");
+
+
+        mensaje.saveChanges();
+
+        mensaje.writeTo(System.out);
+
+        return mensaje;
     }
 
     public static SOAPMessage generarMensaje() throws SOAPException, IOException{

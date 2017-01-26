@@ -35,7 +35,9 @@ public class EstadoBD {
             ));
         }
 
-        return (Estado[])lista.toArray();
+        Estado [] es = new Estado[lista.size()];
+
+        return (Estado[])lista.toArray(es);
 
     }
 
